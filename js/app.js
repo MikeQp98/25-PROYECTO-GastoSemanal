@@ -96,3 +96,4 @@ function agregarGasto(e) {
 }
 
 //Cambios en GitHub
+//Cambios en el codigo desde la CANAIAMA
