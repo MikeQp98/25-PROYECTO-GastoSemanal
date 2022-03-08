@@ -20,6 +20,14 @@ class Presupuesto {
         this.restante = Number(presupuesto);
         this.gastos = [];
     }
+    nuevoGasto(gasto) {
+
+        this.gastos = [...this.gastos, gasto];
+        console.log(this.gastos);
+
+    }
+
+
 }
 
 
@@ -75,7 +83,6 @@ function preguntarPresupuesto () {
 
     //Mostramos el Presupuesto Valido
     presupuesto = new Presupuesto(presupuestoUsuario);
-
     console.log(presupuesto);
 
     ui.insertarPresupuesto(presupuesto);
@@ -86,13 +93,14 @@ function preguntarPresupuesto () {
 function agregarGasto(e) {
     e.preventDefault();
 
-    const nombre = document.querySelector('#gasto').value
-    const cantidad = document.querySelector('#cantidad').value
+    const nombre = document.querySelector('#gasto').value;
+    const cantidad = Number(document.querySelector('#cantidad').value);
     //Validar 
     if(nombre === '' ||  cantidad === '' ) {
         ui.imprimirAlerta('Ambos Campos son obligatorios', 'error');
+        
         return;
-    }else if (cantidad == 0 || isNaN (cantidad)) {
+    }else if (cantidad <= 0 || isNaN (cantidad)) {
         ui.imprimirAlerta('Cantidad no Válida', 'error');
         return;
     }
