@@ -88,13 +88,26 @@ function agregarGasto(e) {
 
     const nombre = document.querySelector('#gasto').value
     const cantidad = document.querySelector('#cantidad').value
-
+    //Validar 
     if(nombre === '' ||  cantidad === '' ) {
-        ui.imprimirAlerta();
+        ui.imprimirAlerta('Ambos Campos son obligatorios', 'error');
+        return;
+    }else if (cantidad == 0 || isNaN (cantidad)) {
+        ui.imprimirAlerta('Cantidad no Válida', 'error');
+        return;
     }
+
+    //generar un objeto con el gasto
+    const gasto = { nombre, cantidad, id: Date.now() }
+
+    //añade un nuevo gasto
+    presupuesto.nuevoGasto (gasto);
+
+    //Mensaje de todo bien
+    ui.imprimirAlerta('Gasto Agregado Correctamente');
+
+    //Reinicia el formulario
+    formulario.reset();
 
 }
 
-//Cambios en GitHub
-//Cambios en el codigo desde la CANAIAMA
-// Te quiero mucho Niniiiii
