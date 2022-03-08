@@ -30,8 +30,12 @@ class Presupuesto {
     calcularRestante () {
         const gastado = this.gastos.reduce( (total, gasto) => total + gasto.cantidad, 0);
         this.restante  = this.presupuesto - gastado;
+    }
 
-        console.log(this.restante);
+    eliminarGasto(id) {
+        this.gastos = this.gastos.filter(gasto => gasto.id !== id);
+
+        console.log(this.gastos);
     }
 
 
@@ -94,7 +98,10 @@ class UI {
             `            // BOTON PARA BORRAR EL GASTO
             const btnBorrar = document.createElement('buton');
             btnBorrar.classList.add('btn', 'btn-danger', 'borrar-gasto');
-            btnBorrar.innerHTML = 'Borrar &times'
+            btnBorrar.innerHTML = 'Borrar &times';
+            btnBorrar.onclick = () => {
+                eliminarGasto(id);
+            }
             nuevoGasto.appendChild(btnBorrar);
             //Agregar al HTML
             gastoListado.appendChild(nuevoGasto);
@@ -198,3 +205,6 @@ function agregarGasto(e) {
 
 }
 
+function eliminarGasto(id) {
+   presupuesto.eliminarGasto(id);
+}
