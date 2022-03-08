@@ -44,8 +44,27 @@ class UI {
         document.querySelector('#restante').textContent = restante;
     }
 
-    imprimirAlerta() {
-        
+    imprimirAlerta(mensaje, tipo) {
+
+        const divMensaje = document.createElement('div');
+        divMensaje.classList.add('text-center', 'alert');
+
+        if (tipo === 'error') {
+            divMensaje.classList.add ('alert-danger');
+        } else {
+            divMensaje.classList.add ('alert-success');
+        }
+
+        //Mensaje de Error
+        divMensaje.textContent = mensaje;
+
+        //insertar en el html
+
+        document.querySelector('.primario').insertBefore (divMensaje, formulario);
+
+        setTimeout(() => {
+            divMensaje.remove();
+        },3000);
     }
 }
 
