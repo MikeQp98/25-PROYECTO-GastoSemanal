@@ -110,6 +110,10 @@ class UI {
         actualizarRestante(restante){
         document.querySelector('#restante').textContent = restante;
         }
+
+        comprobarPresupuesto(presupuestObj) {
+
+        }
 }
 
 //Instanciar
@@ -166,6 +170,8 @@ function agregarGasto(e) {
     const { gastos,restante } = presupuesto;
     ui.agregarGastoListado(gastos);
     ui.actualizarRestante(restante);
+
+    ui.comprobarPresupuesto(presupuesto);
 
     //Reinicia el formulario
     formulario.reset();
