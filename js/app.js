@@ -35,6 +35,9 @@ class UI {
 
     insertarPresupuesto (cantidad) {
        
+        this.limpiarHTML(); // Elimina el Html previo
+
+
        //Tomamos los valores del Presupuesto
         const {presupuesto, restante } = cantidad;
        
@@ -66,20 +69,37 @@ class UI {
             divMensaje.remove();
         },3000);
     }
+
+    agregarGastoListado(gastos) {
+        
+        this.limpiarHTML();
+        //iterar sobre los gastos
+        gastos.forEach ( gasto => {
+
+            const {cantidad, nombre, id } = gasto;
+            //Crear un LI
+            const nuevoGasto = document.createElement('li');
+            nuevoGasto.className = 'list-group-item d-flex justify-content-between align-items-center';
+            nuevoGasto.dataset.id = id;
+            //Agregar al HTML del gasto
+            nuevoGasto.innerHTML = `
+            ${nombre} <span class="badge badge-primary badge-pill"> ${cantidad} </span>
+            `            // BOTON PARA BORRAR EL GASTO
+            const btnBorrar = document.createElement('buton');
+            btnBorrar.classList.add('btn', 'btn-danger', 'borrar-gasto');
+            btnBorrar.innerHTML = 'Borrar &times'
+            nuevoGasto.appendChild(btnBorrar);
+            //Agregar al HTML
+            gastoListado.appendChild(nuevoGasto);
+        })
+    }
+
+        limpiarHTML() {
+            while( gastoListado.firstChild ) {
+                gastoListado.removeChild(gastoListado.firstChild);
+            }
+        }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 //Instanciar
 const ui = new UI();
@@ -132,6 +152,10 @@ function agregarGasto(e) {
 
     //Mensaje de todo bien
     ui.imprimirAlerta('Gasto Agregado Correctamente');
+
+    //Imiprimir los gastos 
+    const { gastos } = presupuesto;
+    ui.agregarGastoListado(gastos)
 
     //Reinicia el formulario
     formulario.reset();
