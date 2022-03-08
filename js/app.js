@@ -113,7 +113,27 @@ class UI {
 
         comprobarPresupuesto(presupuestObj) {
 
+            const { presupuesto, restante } = presupuestObj;
+            const restanteDiv = document.querySelector('.restante');
+            //Comprobar25%
+
+            if ((presupuesto / 4 ) > restante) {
+                restanteDiv.classList.remove('alert-success', 'alert-warning');
+                restanteDiv.classList.add('alert-danger');
+            } else if ( (presupuesto / 2 ) > restante) {
+                restanteDiv.classList.remove('alert-success');
+                restanteDiv.classList.add('alert-warning')
+            }
+
+            if (restante <= 0) {
+                ui.imprimirAlerta('El presupuesto se ha agotado', 'error');
+                formulario.querySelector('button[type="submit"]').disabled = true;
+            }    
         }
+
+                // Prevenir condiciones que excedan el presupuesto
+
+  
 }
 
 //Instanciar
